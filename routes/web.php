@@ -1,5 +1,7 @@
 <?php
 
+use App\Integrations\Ecom\Product;
+use App\Services\ExternalApiClient;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -11,7 +13,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
+    $fakestoreapi = new ExternalApiClient('https://fakestoreapi.com/');
+    $products = Product::collect($fakestoreapi->get('/products'));
+
+    return Inertia::render('Dashboard', ['products' => $products]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/settings.php';

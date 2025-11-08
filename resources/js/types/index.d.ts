@@ -23,7 +23,16 @@ export type AppPageProps<
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
+    products: Product[];
     sidebarOpen: boolean;
+};
+
+export type Product = {
+    readonly id: number;
+    readonly title: string;
+    readonly price: number;
+    readonly description?: string;
+    readonly image?: string;
 };
 
 export interface User {
