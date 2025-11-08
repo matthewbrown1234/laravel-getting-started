@@ -14,6 +14,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 const page = usePage();
 const products = page.props.products;
+const quote = page.props.quote
 </script>
 
 <template>
@@ -32,7 +33,7 @@ const products = page.props.products;
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    <PlaceholderPattern />
+                    {{quote}}
                 </div>
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
