@@ -3,8 +3,10 @@ import OrderHistoryGrid from '@/components/OrderHistoryGrid.vue';
 import ProductsGrid from '@/components/ProductsGrid.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, type OrderHistory } from '@/types';
 import { Head, usePage } from '@inertiajs/vue3';
+import type { RowClickedEvent } from 'ag-grid-community';
+import { computed, ref } from 'vue';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -15,9 +17,23 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 const page = usePage();
 const products = page.props.products;
-const quote = page.props.quote;
 const orderHistoryList = page.props.orderHistoryList;
 const orderHistoryItems = page.props.orderHistoryItems;
+
+const selectedOrderHistoryId = ref<string | undefined>(undefined);
+const selectedOrderHistoryItems = computed(() =>
+    orderHistoryItems.filter(
+        (item) => item.order_history_id === selectedOrderHistoryId.value,
+    ),
+);
+const selectedProducts = computed(() =>
+    products.filter((product) =>
+        selectedOrderHistoryItems.value.some((item) => item.product_id === product.id),
+    ),
+);
+const onOrderSelection = (event: RowClickedEvent<OrderHistory>) => {
+    selectedOrderHistoryId.value = event.data?.id;
+};
 </script>
 
 <template>
@@ -31,12 +47,15 @@ const orderHistoryItems = page.props.orderHistoryItems;
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    <OrderHistoryGrid :orderHistoryList="orderHistoryList" />
+                    <OrderHistoryGrid
+                        :orderHistoryList="orderHistoryList"
+                        :onOrderSelection="onOrderSelection"
+                    />
                 </div>
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    {{ quote }}
+                   Order History ID: {{ selectedOrderHistoryId }}
                 </div>
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
@@ -47,7 +66,7 @@ const orderHistoryItems = page.props.orderHistoryItems;
             <div
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
-                <ProductsGrid :products="products" />
+                <ProductsGrid :products="selectedProducts" />
             </div>
         </div>
     </AppLayout>

@@ -47,7 +47,7 @@ export type OrderHistory = {
 export type OrderHistoryItem = {
     readonly id: string;
     readonly order_history_id: string;
-    readonly product_id: string;
+    readonly product_id: number;
     readonly quantity: number;
     readonly price: number;
 };

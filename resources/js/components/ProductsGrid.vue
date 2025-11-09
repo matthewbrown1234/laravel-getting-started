@@ -3,7 +3,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 import { ref } from 'vue';
 import type { Product } from '@/types';
 
-defineProps<{
+const props = defineProps<{
     products: Product[];
 }>();
 
@@ -27,7 +27,7 @@ const colDefs = ref([
 <template>
     <AgGridVue
         style="height: 100%"
-        :rowData="products"
+        :rowData="props.products"
         :columnDefs="colDefs"
     ></AgGridVue>
 </template>

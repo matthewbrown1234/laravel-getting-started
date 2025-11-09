@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order_history_item', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('order_history_id')->constrained('order_history', 'id');
-            $table->string('product_id');
+            $table->integer('product_id');
             $table->decimal('quantity', 10, 4)->default(1);
             $table->decimal('price', 10, 4);
             $table->timestampsTz();
