@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\OrderHistory;
+use App\Models\OrderHistoryItem;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $orderHistoryList = OrderHistory::factory(10)->create();
+        foreach ($orderHistoryList as $orderHistory) {
+            OrderHistoryItem::factory(
+                rand(1, 10)
+            )->create([
+                'order_history_id' => $orderHistory->id,
+            ]);
+        }
     }
+
 }

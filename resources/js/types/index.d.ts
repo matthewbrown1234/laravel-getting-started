@@ -24,6 +24,8 @@ export type AppPageProps<
     quote: { message: string; author: string };
     auth: Auth;
     products: Product[];
+    orderHistoryItems: OrderHistoryItem[];
+    orderHistoryList: OrderHistory[];
     sidebarOpen: boolean;
 };
 
@@ -33,6 +35,21 @@ export type Product = {
     readonly price: number;
     readonly description?: string;
     readonly image?: string;
+};
+
+export type OrderHistory = {
+    readonly id: string;
+    readonly user_id: number;
+    readonly order_date: string;
+    readonly status: string;
+};
+
+export type OrderHistoryItem = {
+    readonly id: string;
+    readonly order_history_id: string;
+    readonly product_id: string;
+    readonly quantity: number;
+    readonly price: number;
 };
 
 export interface User {

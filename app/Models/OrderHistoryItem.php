@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class OrderHistory extends Model
+class OrderHistoryItem extends Model
 {
     use HasFactory;
     protected $fillable = [
         'id',
-        'user_id',
-        'order_date',
-        'status',
+        'order_history_id',
+        'product_id',
+        'quantity',
     ];
-    protected $table = 'order_history';
+    protected $table = 'order_history_item';
     public $incrementing = false;
 
     protected $primaryKey = 'id';
     protected $keyType = 'string';
+
     protected $casts = [
-        'order_date' => 'datetime',
     ];
     // Optionally, automatically generate UUIDs on model creation
     protected static function boot(): void

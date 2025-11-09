@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_history', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users', 'id');
             $table->timestampTz(
                 'order_date',
                 precision: 0
             )->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('status')->default('pending');
+            $table->timestampstz(precision: 0);
         });
     }
 

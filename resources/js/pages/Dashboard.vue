@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import OrderHistoryGrid from '@/components/OrderHistoryGrid.vue';
+import ProductsGrid from '@/components/ProductsGrid.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
-import ProductsGrid from '@/components/ProductsGrid.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -14,9 +15,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 const page = usePage();
 const products = page.props.products;
-const quote = page.props.quote
-const orderHistory = page.props.orderHistory
-const singleOrderHistory = page.props.singleOrderHistory
+const quote = page.props.quote;
+const orderHistoryList = page.props.orderHistoryList;
+const orderHistoryItems = page.props.orderHistoryItems;
 </script>
 
 <template>
@@ -30,17 +31,16 @@ const singleOrderHistory = page.props.singleOrderHistory
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    {{orderHistory}}
+                    <OrderHistoryGrid :orderHistoryList="orderHistoryList" />
                 </div>
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    {{quote}}
+                    {{ quote }}
                 </div>
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    {{singleOrderHistory}}
                     <PlaceholderPattern />
                 </div>
             </div>
