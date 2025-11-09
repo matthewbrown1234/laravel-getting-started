@@ -15,6 +15,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 const page = usePage();
 const products = page.props.products;
 const quote = page.props.quote
+const orderHistory = page.props.orderHistory
+const singleOrderHistory = page.props.singleOrderHistory
 </script>
 
 <template>
@@ -28,7 +30,7 @@ const quote = page.props.quote
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    <PlaceholderPattern />
+                    {{orderHistory}}
                 </div>
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
@@ -38,6 +40,7 @@ const quote = page.props.quote
                 <div
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
+                    {{singleOrderHistory}}
                     <PlaceholderPattern />
                 </div>
             </div>
