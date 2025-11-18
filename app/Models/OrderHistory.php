@@ -1,37 +1,48 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
+/**
+ * @property string $id
+ * @property int $user_id
+ * @property Carbon $order_date
+ * @property OrderStatus $status
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class OrderHistory extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
+    protected $table = 'order_history';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'user_id',
         'order_date',
         'status',
     ];
-    protected $table = 'order_history';
-    public $incrementing = false;
 
-    protected $primaryKey = 'id';
-    protected $keyType = 'string';
     protected $casts = [
         'order_date' => 'datetime',
+        'user_id' => 'integer',
+        'status' => OrderStatus::class,
     ];
-    // Optionally, automatically generate UUIDs on model creation
-    protected static function boot(): void
-    {
-        parent::boot();
+}
 
-        static::creating(function (Model $model) {
-            if (empty($model->{$model->getKeyName()})) {
-                $model->id = Str::uuid();
-            }
-        });
-    }
+enum OrderStatus: string
+{
+    case Pending = 'pending';
+    case Shipped = 'shipped';
+    case Completed = 'completed';
+    case Canceled = 'canceled';
 }
