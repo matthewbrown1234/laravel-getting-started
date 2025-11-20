@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { OrderHistory } from '@/types';
-import { AgGridVue } from 'ag-grid-vue3';
 import { type RowClickedEvent, RowSelectionOptions } from 'ag-grid-community';
+import { AgGridVue } from 'ag-grid-vue3';
 import { ref } from 'vue';
 
-defineProps<{
+const { orderHistoryList } = defineProps<{
     orderHistoryList: OrderHistory[];
     onOrderSelection: (event: RowClickedEvent<OrderHistory>) => void;
 }>();
@@ -15,10 +15,11 @@ const colDefs = ref([
     { filter: true, field: 'order_date', headerName: 'Order Date', width: 300 },
     { filter: true, field: 'status', headerName: 'Status', width: 100 },
 ]);
+
 const rowSelection: RowSelectionOptions = {
-    mode: "singleRow",
+    mode: 'singleRow',
     enableClickSelection: true,
-}
+};
 </script>
 
 <template>
