@@ -12,11 +12,9 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const page = usePage();
+const { props } = usePage();
 
-const orders = page.props.orders;
-
-console.log(orders);
+const { orders } = props;
 </script>
 
 <template>

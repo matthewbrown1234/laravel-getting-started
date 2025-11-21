@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { EditButton, StatusCell } from '@/components/ui/grid/cells';
 import type { Order } from '@/types';
+import { router } from '@inertiajs/vue3';
 import { ColDef } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 import { ref } from 'vue';
@@ -30,6 +31,11 @@ const colDefs = ref<ColDef[]>([
     {
         filter: false,
         cellRenderer: EditButton,
+        cellRendererParams: {
+            onClick: (order: Order) => {
+                router.visit(`/orders/${order.id}`);
+            },
+        },
         width: 70,
     },
 ]);

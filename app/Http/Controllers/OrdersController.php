@@ -14,7 +14,7 @@ class OrdersController extends Controller
     public function index()
     {
         return Inertia::render('orders/Index', [
-            'orders' => Orders::with('user')->get(),
+            'orders' => Orders::with('user')->orderByDesc('order_date')->get(),
         ]);
     }
 
@@ -39,7 +39,9 @@ class OrdersController extends Controller
      */
     public function show(Orders $orders)
     {
-        //
+        return Inertia::render('orders/Edit', [
+            'order' => $orders->load('user'),
+        ]);
     }
 
     /**
