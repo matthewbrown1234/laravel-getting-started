@@ -1,7 +1,17 @@
 # Laravel
-This uses Laravel Vue Starter Kit.
+This is meant to be a learning sandbox for PHP, Laravel, and Vue. This uses Laravel Vue Starter Kit with Vue SSR.
 
 * [Github Repo](https://github.com/laravel/vue-starter-kit)
+
+# Prerequisites
+- run migrations
+```bash
+php artisan migrate
+```
+- run seeders
+```bash
+php artisan db:seed
+```
 
 # Getting Started
 
