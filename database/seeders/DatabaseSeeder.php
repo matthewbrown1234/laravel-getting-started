@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\OrderHistory;
-use App\Models\OrderHistoryItem;
+use App\Models\Orders;
+use App\Models\OrderItem;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $orderHistoryList = OrderHistory::factory(10)->create();
-        foreach ($orderHistoryList as $orderHistory) {
-            OrderHistoryItem::factory(
+        $orders = Orders::factory(100)->create();
+        foreach ($orders as $order) {
+            OrderItem::factory(
                 rand(1, 10)
             )->create([
-                'order_history_id' => $orderHistory->id,
+                'order_id' => $order->id,
             ]);
         }
     }

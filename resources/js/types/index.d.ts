@@ -24,8 +24,8 @@ export type AppPageProps<
     quote: { message: string; author: string };
     auth: Auth;
     products: Product[];
-    orderHistoryItems: OrderHistoryItem[];
-    orderHistoryList: OrderHistory[];
+    orderItems: OrderItem[];
+    orders: Order[];
     sidebarOpen: boolean;
 };
 
@@ -37,7 +37,7 @@ export type Product = {
     readonly image?: string;
 };
 
-export type OrderHistory = {
+export type Order = {
     readonly id: string;
     readonly user_id: number;
     readonly user: User;
@@ -45,9 +45,8 @@ export type OrderHistory = {
     readonly status: 'pending' | 'completed' | 'canceled' | 'shipped';
 };
 
-export type OrderHistoryItem = {
+export type OrderItem = {
     readonly id: string;
-    readonly order_history_id: string;
     readonly product_id: number;
     readonly quantity: number;
     readonly price: number;

@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { EditButton, StatusCell } from '@/components/ui/grid/cells';
-import type { OrderHistory } from '@/types';
+import type { Order } from '@/types';
 import { ColDef } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 import { ref } from 'vue';
 
-const { orderHistoryList } = defineProps<{
-    orderHistoryList: OrderHistory[];
+const { orders } = defineProps<{
+    orders: Order[];
 }>();
-
-console.log('orderHistoryList:', orderHistoryList);
 
 // Column Definitions: Defines the columns to be displayed.
 const colDefs = ref<ColDef[]>([
@@ -40,7 +38,7 @@ const colDefs = ref<ColDef[]>([
 <template>
     <AgGridVue
         style="height: 100%"
-        :rowData="orderHistoryList"
+        :rowData="orders"
         :columnDefs="colDefs"
     ></AgGridVue>
 </template>

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_history_item', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('order_history_id')->constrained('order_history', 'id');
+            $table->foreignUuid('order_id')->constrained('orders', 'id');
             $table->integer('product_id');
             $table->decimal('quantity', 10, 4)->default(1);
             $table->decimal('price', 10, 4);
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_history_item');
+        Schema::dropIfExists('order_items');
     }
 };

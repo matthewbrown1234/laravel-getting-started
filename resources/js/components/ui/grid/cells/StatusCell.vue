@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Chip } from '@/components/ui/chip';
-import { OrderHistory } from '@/types';
+import { Order } from '@/types';
 import type { ICellRendererParams } from 'ag-grid-community';
 import { computed } from 'vue';
 
 type Props = {
-    params: ICellRendererParams<{ status: OrderHistory['status'] }>;
+    params: ICellRendererParams<{ status: Order['status'] }>;
 };
 
 const { params } = defineProps<Props>();

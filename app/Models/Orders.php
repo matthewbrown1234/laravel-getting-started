@@ -20,11 +20,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class OrderHistory extends Model
+class Orders extends Model
 {
     use HasFactory, HasUuids; // NOTE: these are called traits
 
-    protected $table = 'order_history'; // Note: need this because of FW opinions on plural table names
 
     protected $fillable = [
         'id',

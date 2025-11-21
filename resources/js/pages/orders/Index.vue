@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import OrderHistoryGrid from '@/components/OrderHistoryGrid.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { list } from '@/routes/order-history';
+import { index } from '@/routes/orders';
 import { Head, usePage } from '@inertiajs/vue3';
 
+import OrdersGrid from '@/components/OrdersGrid.vue';
 import type { BreadcrumbItem } from '@/types';
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Order History',
-        href: list().url,
+        title: 'Orders',
+        href: index().url,
     },
 ];
 
 const page = usePage();
 
-const orderHistoryList = page.props.orderHistoryList;
+const orders = page.props.orders;
+
+console.log(orders);
 </script>
 
 <template>
@@ -26,7 +28,7 @@ const orderHistoryList = page.props.orderHistoryList;
             <div
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
-                <OrderHistoryGrid :orderHistoryList="orderHistoryList" />
+                <OrdersGrid :orders="orders" />
             </div>
         </div>
     </AppLayout>

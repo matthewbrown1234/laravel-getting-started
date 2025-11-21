@@ -12,7 +12,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { list as orderHistoryList } from '@/routes/order-history';
+import { index as orders } from '@/routes/orders';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
@@ -25,8 +25,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Order History',
-        href: orderHistoryList(),
+        title: 'Orders',
+        href: orders(),
         icon: LayoutGrid,
     },
 ];

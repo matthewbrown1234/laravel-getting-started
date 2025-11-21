@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class OrderHistoryItem extends Model
+class OrderItem extends Model
 {
     use HasFactory;
     protected $fillable = [
         'id',
-        'order_history_id',
+        'order_id',
         'product_id',
         'quantity',
     ];
-    protected $table = 'order_history_item';
     public $incrementing = false;
 
     protected $primaryKey = 'id';
