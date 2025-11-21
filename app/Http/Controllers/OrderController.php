@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -57,6 +59,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        if ($order->status === OrderStatus::Shipped && $request->input('status') === OrderStatus::Canceled->value) {
+            throw ValidationException::withMessages([
+                'error' => ['Cannot cancel a shipped order'],
+            ]);
+        }
+
         $validated = $request->validate([
             'status' => ['required', 'string', 'in:pending,shipped,completed,canceled'],
         ]);

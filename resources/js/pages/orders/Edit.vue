@@ -3,7 +3,7 @@ import { Spinner } from '@/components/ui/spinner';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index, show, update } from '@/routes/orders';
 import { AppPageProps, BreadcrumbItem, Order } from '@/types';
-import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { Head, InertiaFormErrors, useForm, usePage } from '@inertiajs/vue3';
 import {
     SelectContent,
     SelectItem,
@@ -42,7 +42,7 @@ const statusOptions = [
 
 const selectedStatus = ref(props.order.status);
 
-const form = useForm({
+const form = useForm<InertiaFormErrors>({
     status: props.order.status,
 });
 
@@ -65,6 +65,12 @@ const handleSubmit = () => {
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 p-6 md:min-h-min dark:border-sidebar-border"
             >
                 <h1 class="mb-6 text-2xl font-bold">Edit Order</h1>
+                <div
+                    v-if="form.errors.error"
+                    class="mb-4 rounded-md bg-red-50 p-4 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                >
+                    {{ form.errors.error }}
+                </div>
                 <form @submit.prevent="handleSubmit" class="space-y-6">
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-medium"> Order ID </label>
@@ -110,7 +116,6 @@ const handleSubmit = () => {
                         />
                     </div>
 
-                    <!-- Status (editable using reka-ui Select) -->
                     <div class="flex flex-col gap-2">
                         <label
                             :class="[
@@ -173,8 +178,6 @@ const handleSubmit = () => {
                             {{ form.errors.status }}
                         </p>
                     </div>
-
-                    <!-- Submit Button -->
                     <div class="flex gap-4">
                         <button
                             type="submit"

@@ -60,3 +60,10 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+declare module '@inertiajs/vue3' {
+    export interface InertiaFormErrors {
+        error?: string;
+        [key: string]: string | string[] | undefined;
+    }
+}
