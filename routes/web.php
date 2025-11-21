@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderHistoryController;
 use App\Integrations\Ecom\Product;
 use App\Models\OrderHistory;
 use App\Models\OrderHistoryItem;
@@ -20,9 +21,13 @@ Route::get('dashboard', function () {
 
     return Inertia::render('Dashboard', [
         'products' => $products,
-        'orderHistoryList' => OrderHistory::all(),
         'orderHistoryItems' => OrderHistoryItem::all(),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::redirect('order-history', '/order-history');
+    Route::get('order-history', [OrderHistoryController::class, 'list'])->name('order-history.list');
+});
 
 require __DIR__.'/settings.php';

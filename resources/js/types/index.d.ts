@@ -40,6 +40,7 @@ export type Product = {
 export type OrderHistory = {
     readonly id: string;
     readonly user_id: number;
+    readonly user: User;
     readonly order_date: string;
     readonly status: 'pending' | 'completed' | 'canceled' | 'shipped';
 };
