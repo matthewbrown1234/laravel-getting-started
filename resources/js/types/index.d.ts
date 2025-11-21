@@ -41,7 +41,7 @@ export type OrderHistory = {
     readonly id: string;
     readonly user_id: number;
     readonly order_date: string;
-    readonly status: string;
+    readonly status: 'pending' | 'completed' | 'canceled' | 'shipped';
 };
 
 export type OrderHistoryItem = {

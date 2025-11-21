@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
+import type { Product } from '@/types';
 import { AgGridVue } from 'ag-grid-vue3';
 import { ref } from 'vue';
-import type { Product } from '@/types';
 
 const props = defineProps<{
     products: Product[];
@@ -26,10 +27,12 @@ const colDefs = ref([
 
 <template>
     <AgGridVue
+        v-if="props.products && props.products.length > 0"
         style="height: 100%"
         :rowData="props.products"
         :columnDefs="colDefs"
     ></AgGridVue>
+    <PlaceholderPattern v-else />
 </template>
 
 <style scoped></style>

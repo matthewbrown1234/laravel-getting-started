@@ -20,6 +20,17 @@
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
+    --default-chip-bg: #737373FF;
+    --default-chip-text: #fff;
+    --primary-chip-bg: #3B82F6FF;
+    --primary-chip-text: #fff;
+    --secondary-chip-bg: #000;
+    --secondary-chip-text: #fff;
+    --destructive-chip-bg: #f87171;
+    --destructive-chip-text: #fff;
+    --outline-chip-bg: transparent;
+    --outline-chip-text: #000;
+
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
 
