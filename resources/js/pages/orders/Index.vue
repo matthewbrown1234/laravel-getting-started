@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import OrdersGrid from '@/components/OrdersGrid.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index } from '@/routes/orders';
+import { AppPageProps, BreadcrumbItem, Order } from '@/types';
 import { Head, usePage } from '@inertiajs/vue3';
 
-import OrdersGrid from '@/components/OrdersGrid.vue';
-import type { BreadcrumbItem } from '@/types';
+type OrdersPageProps = {
+    orders: Order[];
+};
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Orders',
@@ -12,13 +16,13 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const { props } = usePage();
+const { props } = usePage<AppPageProps<OrdersPageProps>>();
 
 const { orders } = props;
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Orders" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"

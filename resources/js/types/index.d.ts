@@ -23,9 +23,6 @@ export type AppPageProps<
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
-    products: Product[];
-    orderItems: OrderItem[];
-    orders: Order[];
     sidebarOpen: boolean;
 };
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class OrdersController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class OrdersController extends Controller
     public function index()
     {
         return Inertia::render('orders/Index', [
-            'orders' => Orders::with('user')->orderByDesc('order_date')->get(),
+            'orders' => Order::with('user')->orderByDesc('order_date')->get(),
         ]);
     }
 
@@ -37,17 +37,17 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Orders $orders)
+    public function show(Order $order)
     {
         return Inertia::render('orders/Edit', [
-            'order' => $orders->load('user'),
+            'order' => $order->load('user'),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Orders $orders)
+    public function edit(Order $order)
     {
         //
     }
@@ -55,15 +55,21 @@ class OrdersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, Order $order)
     {
-        //
+        $validated = $request->validate([
+            'status' => ['required', 'string', 'in:pending,shipped,completed,canceled'],
+        ]);
+
+        $order->update($validated);
+
+        return redirect()->back()->with('success', 'Order status updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $orders)
+    public function destroy(Order $order)
     {
         //
     }

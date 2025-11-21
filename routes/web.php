@@ -24,7 +24,7 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('orders', 'App\Http\Controllers\OrdersController');
+    Route::resource('orders', 'App\Http\Controllers\OrderController');
 });
 
 require __DIR__.'/settings.php';

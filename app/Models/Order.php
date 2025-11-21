@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Orders extends Model
+class Order extends Model
 {
     use HasFactory, HasUuids; // NOTE: these are called traits
 
