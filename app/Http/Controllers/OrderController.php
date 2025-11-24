@@ -13,10 +13,26 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = Order::query()->with('user');
+
+        if ($request->has('sort')) {
+            $sortArray = json_decode($request->sort, true);
+            if (is_array($sortArray)) {
+                foreach ($sortArray as $sortOption) {
+                    $col = $sortOption['col'] ?? null;
+                    $dir = $sortOption['dir'] ?? null;
+                    if ($dir && in_array($col, ['order_date', 'status']) && in_array(strtolower($dir), ['asc', 'desc'])) {
+                        $query->orderBy($col, $dir);
+                    }
+                }
+            }
+        }
+
         return Inertia::render('orders/Index', [
-            'orders' => Order::with('user')->orderByDesc('order_date')->get(),
+            'paginatedOrders' => fn () => $query->
+                paginate(request()->per_page ?? 100, ['*'], 'page', request()->page ?? 1),
         ]);
     }
 

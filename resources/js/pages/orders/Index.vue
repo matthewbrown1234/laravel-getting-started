@@ -2,11 +2,16 @@
 import OrdersGrid from '@/components/OrdersGrid.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index } from '@/routes/orders';
-import { AppPageProps, BreadcrumbItem, Order } from '@/types';
+import {
+    AppPageProps,
+    BreadcrumbItem,
+    LaravelPagination,
+    Order,
+} from '@/types';
 import { Head, usePage } from '@inertiajs/vue3';
 
-type OrdersPageProps = {
-    orders: Order[];
+export type OrdersPageProps = {
+    paginatedOrders: LaravelPagination<Order>;
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -16,9 +21,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const { props } = usePage<AppPageProps<OrdersPageProps>>();
-
-const { orders } = props;
+const page = usePage<AppPageProps<OrdersPageProps>>();
 </script>
 
 <template>
@@ -30,7 +33,7 @@ const { orders } = props;
             <div
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
-                <OrdersGrid :orders="orders" />
+                <OrdersGrid :paginatedOrders="page.props.paginatedOrders" />
             </div>
         </div>
     </AppLayout>
