@@ -14,7 +14,6 @@ import {
     SelectValue,
     SelectViewport,
 } from 'reka-ui';
-import { ref } from 'vue';
 
 type OrderPageProps = {
     order: Order;
@@ -39,8 +38,6 @@ const statusOptions = [
     { value: 'canceled', label: 'Canceled' },
     { value: 'matt', label: 'Matt' },
 ];
-
-const selectedStatus = ref(props.order.status);
 
 const form = useForm<InertiaFormErrors>({
     status: props.order.status,
@@ -126,15 +123,7 @@ const handleSubmit = () => {
                         >
                             Status
                         </label>
-                        <SelectRoot
-                            v-model="form.status"
-                            @update:model-value="
-                                (value) => {
-                                    form.status = value as Order['status'];
-                                    selectedStatus = value as Order['status'];
-                                }
-                            "
-                        >
+                        <SelectRoot v-model="form.status">
                             <SelectTrigger
                                 :class="[
                                     'flex w-full items-center justify-between rounded-md border px-3 py-2 text-left',
@@ -148,7 +137,7 @@ const handleSubmit = () => {
                                     :placeholder="'Select status'"
                                     class="capitalize"
                                 >
-                                    {{ selectedStatus }}
+                                    {{ form.status }}
                                 </SelectValue>
                             </SelectTrigger>
                             <SelectPortal>
